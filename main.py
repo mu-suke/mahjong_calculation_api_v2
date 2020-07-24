@@ -17,3 +17,4 @@ async def read_item(item_id):
 @app.get("/calc/")
 async def query_parameter(man: int, pin: int, sou: int, win_tile: int):
     return {"man": man, "pin": pin, "sou": sou, "win_tile": win_tile}
+
