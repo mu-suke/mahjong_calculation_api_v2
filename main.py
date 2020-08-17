@@ -62,6 +62,7 @@ async def test(item:Item):
     tiles = TilesConverter.string_to_136_array(man=item.man_tile, pin=item.pin_tile, sou=item.sou_tile)
 
     # アガリ牌(ソーズの5)
+    # TODO: ここができていない
     win_tile = TilesConverter.string_to_136_array(man=item.winning_tile['man'], pin=item.winning_tile['pin'], sou=item.winning_tile['sou'], honors=item.winning_tile['honors'])[0]
 
     # 鳴き(チー:CHI, ポン:PON, カン:KAN(True:ミンカン,False:アンカン), カカン:CHANKAN, ヌキドラ:NUKI)
