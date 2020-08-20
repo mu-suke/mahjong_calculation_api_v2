@@ -61,9 +61,12 @@ async def test(item:Item):
     # アガリ形(man=マンズ, pin=ピンズ, sou=ソーズ, honors=字牌)
     tiles = TilesConverter.string_to_136_array(man=item.man_tile, pin=item.pin_tile, sou=item.sou_tile)
 
-    # アガリ牌(ソーズの5)
-    # TODO: ここができていない
-    win_tile = TilesConverter.string_to_136_array(man=item.winning_tile['man'], pin=item.winning_tile['pin'], sou=item.winning_tile['sou'], honors=item.winning_tile['honors'])[0]
+    winning_tile = {'man': '', 'pin': '', 'sou': ''}
+    winning_tile['man'] = None if item.winning_tile['man'] is None else item.winning_tile['man']
+    winning_tile['pin'] = None if item.winning_tile['pin'] is None else item.winning_tile['pin']
+    winning_tile['sou'] = None if item.winning_tile['sou'] is None else item.winning_tile['sou']
+    print(winning_tile['sou'])
+    win_tile = TilesConverter.string_to_136_array(man=winning_tile['man'], pin=winning_tile['pin'], sou=winning_tile['sou'])[0]
 
     # 鳴き(チー:CHI, ポン:PON, カン:KAN(True:ミンカン,False:アンカン), カカン:CHANKAN, ヌキドラ:NUKI)
     melds = item.melds if not None else None
@@ -72,7 +75,7 @@ async def test(item:Item):
     dora_indicators = item.dora_indicators if not None else None
 
     # オプション(なし)
-    config = HandConfig(is_tsumo=item.is_tsumo, is_riichi=item.is_tsumo) if not None else None
+    config = HandConfig(is_tsumo=item.is_tsumo, is_riichi=item.is_riichi) if not None else None
 
     result = calculator.estimate_hand_value(tiles, win_tile, melds, dora_indicators, config)
 
